@@ -72,7 +72,7 @@ def Tencent_scan(regions):
     InstanceName_list = []
     CreatedTime_list = []
     ExpiredTime_list = []
-    # Regions_list = []
+    Regions_list = []
     for key in regions:
         client = cvm_client.CvmClient(cred,key, clientProfile)
         req = cvm_models.DescribeInstancesRequest()
@@ -88,7 +88,7 @@ def Tencent_scan(regions):
                 InstanceName_list.append(str(s["InstanceSet"][i]["InstanceName"]))
                 OSname_list.append(str(s["InstanceSet"][i]["OsName"]))
                 CPU_list.append(str(s["InstanceSet"][i]["CPU"]))
-                # Regions_list.append(str(s["Zone"][i]["Zone"]))
+                Regions_list.append(str(s["InstanceSet"][1]["Placement"]["Zone"]))
                 Memory_list.append(str(s["InstanceSet"][i]["Memory"]))
                 PrivateIpAddresses_list.append(str(s["InstanceSet"][i]["PrivateIpAddresses"]))
                 PublicIpAddresses_list.append(str(s["InstanceSet"][i]["PublicIpAddresses"]))
@@ -98,6 +98,7 @@ def Tencent_scan(regions):
             dataframe = pd.DataFrame({'InstanceId':InstanceId_list,
                                       '实例名称':InstanceName_list,
                                       '操作系统':OSname_list,
+                                      '地域名称':Regions_list,
                                       'CPU核数':CPU_list,
                                       '内存大小':Memory_list,
                                       '内网地址':PrivateIpAddresses_list,
