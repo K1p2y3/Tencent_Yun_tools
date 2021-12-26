@@ -10,7 +10,8 @@ from tencentcloud.common import credential
 from tencentcloud.common.profile.client_profile import ClientProfile
 from tencentcloud.common.profile.http_profile import HttpProfile
 from tencentcloud.common.exception.tencent_cloud_sdk_exception import TencentCloudSDKException
-from tencentcloud.cvm.v20170312 import cvm_client, models
+from tencentcloud.cvm.v20170312 import cvm_client 
+from tencentcloud.cvm.v20170312 import models as cvm_models
 from tencentcloud.tat.v20201028 import tat_client, models
 import pandas as pd
 import base64
@@ -74,7 +75,7 @@ def Tencent_scan(regions):
     # Regions_list = []
     for key in regions:
         client = cvm_client.CvmClient(cred,key, clientProfile)
-        req = models.DescribeInstancesRequest()
+        req = cvm_models.DescribeInstancesRequest()
         params = {}
         req.from_json_string(json.dumps(params))
         resp = client.DescribeInstances(req).to_json_string()
@@ -108,6 +109,9 @@ def Tencent_scan(regions):
             print("[+] 正在扫描" + str(regions[key]) + "主机 : " + str(TotalCount))
 
 def Tencent_command(id,regions,command):
+    httpProfile.endpoint = "cvm.tencentcloudapi.com"
+    clientProfile = ClientProfile()
+    clientProfile.httpProfile = httpProfile
     str1 = command.encode('utf-8')
     command_str = base64.b64encode(str1).decode('utf-8')
     httpProfile.endpoint = "tat.tencentcloudapi.com"
