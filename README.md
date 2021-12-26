@@ -18,6 +18,7 @@ python3 Tencent_rce.py -s
  ![image](img/02.png)
 
 * 生成CSV文件
+ ![image](img/0202.png)
 
 ## >  Runcommand
 
@@ -27,5 +28,5 @@ python3 Tencent_rce.py -i ins-xxxxx -r ap-beijing -c "touch /tmp/12.txt"
 
  ![image](img/03.png)
  
- 
+ ----
  ![image](img/04.png)
