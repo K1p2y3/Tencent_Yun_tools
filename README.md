@@ -2,6 +2,7 @@
 
 * 使用 python3.9 + 腾讯云 AccessKey 利用工具
 * 使用之前请先填写config.ini配置文件
+* 欢迎提 bug
 
 ## >  Usage
 
