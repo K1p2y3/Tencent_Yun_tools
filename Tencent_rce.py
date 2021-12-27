@@ -21,12 +21,17 @@ cf.read('./config.ini', encoding='UTF-8')
 SecretId = cf.get("config", "SecretId")
 SecretKey = cf.get("config", "SecretKey")
 
+# 判断config.ini
+try:
+    cred = credential.Credential(SecretId,SecretKey)
+    httpProfile = HttpProfile()
+    httpProfile.endpoint = "cvm.tencentcloudapi.com"
+    clientProfile = ClientProfile()
+    clientProfile.httpProfile = httpProfile
+except:
+    print("请填写config.ini文件")
+    exit(0)
 
-cred = credential.Credential(SecretId,SecretKey)
-httpProfile = HttpProfile()
-httpProfile.endpoint = "cvm.tencentcloudapi.com"
-clientProfile = ClientProfile()
-clientProfile.httpProfile = httpProfile
 
 
 def banner():
@@ -59,7 +64,7 @@ def Tencent_get_Regions():
         a_dict = dict(zip(Region_list,RegionName_list))
         return a_dict
     except TencentCloudSDKException:
-        pass
+        print("获取地域信息失败，请确认Accesskey是否有效")
 
 def Tencent_scan(regions):
     InstanceId_list = []
@@ -88,7 +93,7 @@ def Tencent_scan(regions):
                 InstanceName_list.append(str(s["InstanceSet"][i]["InstanceName"]))
                 OSname_list.append(str(s["InstanceSet"][i]["OsName"]))
                 CPU_list.append(str(s["InstanceSet"][i]["CPU"]))
-                Regions_list.append(str(s["InstanceSet"][0]["Placement"]["Zone"]))
+                Regions_list.append(str(key))
                 Memory_list.append(str(s["InstanceSet"][i]["Memory"]))
                 PrivateIpAddresses_list.append(str(s["InstanceSet"][i]["PrivateIpAddresses"]))
                 PublicIpAddresses_list.append(str(s["InstanceSet"][i]["PublicIpAddresses"]))
@@ -110,9 +115,6 @@ def Tencent_scan(regions):
             print("[+] 正在扫描" + str(regions[key]) + "主机 : " + str(TotalCount))
 
 def Tencent_command(id,regions,command):
-    httpProfile.endpoint = "cvm.tencentcloudapi.com"
-    clientProfile = ClientProfile()
-    clientProfile.httpProfile = httpProfile
     str1 = command.encode('utf-8')
     command_str = base64.b64encode(str1).decode('utf-8')
     httpProfile.endpoint = "tat.tencentcloudapi.com"
