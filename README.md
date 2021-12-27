@@ -34,5 +34,8 @@ python3 Tencent_rce.py -i ins-xxxxx -r ap-beijing -c "touch /tmp/12.txt"
  ![image](img/04.png)
  
  * 需要注意的点：没有装Agent的主机不能使用
+
+ - [ ] GUI界面
+ - [ ] Agent检测
  
  * 本项目仅供测试使用 ～
