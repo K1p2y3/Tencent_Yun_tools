@@ -88,7 +88,7 @@ def Tencent_scan(regions):
                 InstanceName_list.append(str(s["InstanceSet"][i]["InstanceName"]))
                 OSname_list.append(str(s["InstanceSet"][i]["OsName"]))
                 CPU_list.append(str(s["InstanceSet"][i]["CPU"]))
-                Regions_list.append(str(s["InstanceSet"][1]["Placement"]["Zone"]))
+                Regions_list.append(str(s["InstanceSet"][0]["Placement"]["Zone"]))
                 Memory_list.append(str(s["InstanceSet"][i]["Memory"]))
                 PrivateIpAddresses_list.append(str(s["InstanceSet"][i]["PrivateIpAddresses"]))
                 PublicIpAddresses_list.append(str(s["InstanceSet"][i]["PublicIpAddresses"]))
