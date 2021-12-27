@@ -32,4 +32,6 @@ python3 Tencent_rce.py -i ins-xxxxx -r ap-beijing -c "touch /tmp/12.txt"
  ----
  ![image](img/04.png)
  
+ * 需要注意的点：-r 参数后边 + 地域信息后边不要加数字 例如北京，就直接ap-beijing 香港：ap-hoongkong
+ 
  * 本项目仅供测试使用 ～
