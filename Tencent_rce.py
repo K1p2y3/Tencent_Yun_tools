@@ -65,6 +65,7 @@ def Tencent_get_Regions():
         return a_dict
     except TencentCloudSDKException:
         print("获取地域信息失败，请确认Accesskey是否有效")
+        exit(0)
 
 def Tencent_scan(regions):
     InstanceId_list = []
@@ -138,15 +139,14 @@ def main():
     args = parser.parse_args()
 
     if Tencent_get_Regions():
+        banner()
         regions = Tencent_get_Regions()
         if args.regions and args.command and args.instanceid:
-            banner()
             Tencent_command(args.instanceid,args.regions,args.command)
         elif args.scan == True:
-            banner()
             Tencent_scan(regions)
         else:
-            banner()
+            exit(0)
 
 
 if __name__=="__main__":
