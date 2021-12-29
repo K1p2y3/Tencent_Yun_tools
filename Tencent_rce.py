@@ -67,7 +67,7 @@ def Tencent_get_Regions():
         a_dict = dict(zip(Region_list,RegionName_list))
         return a_dict
     except TencentCloudSDKException:
-        print("获取地域信息失败，请确认Accesskey是否有效")
+        print(Fore.RED + "[+] 获取地域信息失败，请确认Accesskey是否有效 [+]" + Style.RESET_ALL)
         exit(0)
 
 def Tencent_scan(regions):
