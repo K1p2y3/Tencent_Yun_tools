@@ -146,10 +146,10 @@ def main():
         regions = Tencent_get_Regions()
         Tencent_scan(regions)
 
-        if args.regions and args.command and args.instanceid:
-            Tencent_command(args.instanceid,args.regions,args.command)
-        else:
-            exit(0)
+    if args.regions and args.command and args.instanceid:
+        Tencent_command(args.instanceid,args.regions,args.command)
+    else:
+        exit(0)
 
 
 if __name__=="__main__":
