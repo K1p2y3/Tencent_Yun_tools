@@ -16,21 +16,24 @@ from tencentcloud.tat.v20201028 import tat_client, models
 import pandas as pd
 import base64
 
-cf = configparser.ConfigParser()
-cf.read('./config.ini', encoding='UTF-8')
-SecretId = cf.get("config", "SecretId")
-SecretKey = cf.get("config", "SecretKey")
 
-# 判断config.ini
+
+
 try:
-    cred = credential.Credential(SecretId,SecretKey)
-    httpProfile = HttpProfile()
-    httpProfile.endpoint = "cvm.tencentcloudapi.com"
-    clientProfile = ClientProfile()
-    clientProfile.httpProfile = httpProfile
+    cf = configparser.ConfigParser()
+    cf.read('./config.ini', encoding='UTF-8')
+    SecretId = cf.get("config", "SecretId")
+    SecretKey = cf.get("config", "SecretKey")
+
 except:
-    print("请填写config.ini文件")
+    print(Fore.YELLOW + "[+] 请填写config.ini文件 [+]" + Style.RESET_ALL)
     exit(0)
+
+cred = credential.Credential(SecretId,SecretKey)
+httpProfile = HttpProfile()
+httpProfile.endpoint = "cvm.tencentcloudapi.com"
+clientProfile = ClientProfile()
+clientProfile.httpProfile = httpProfile
 
 
 
@@ -131,6 +134,7 @@ def Tencent_command(id,regions,command):
     print(resp.to_json_string())
 
 def main():
+    banner()
     parser = argparse.ArgumentParser(description='python3 Tencent_rce.py -i InstanceId -r ap-beijing -c "whoami"')
     parser.add_argument('-s','--scan',action='store_true',required=False,help='Scan Virtual Machine ')
     parser.add_argument('-i','--instanceid',required=False,help='Scan Virtual Machine ')
@@ -138,13 +142,12 @@ def main():
     parser.add_argument('-c','--command',required=False,type=str,help='Commands to execute ')
     args = parser.parse_args()
 
-    if Tencent_get_Regions():
-        banner()
+    if args.scan == True:
         regions = Tencent_get_Regions()
+        Tencent_scan(regions)
+
         if args.regions and args.command and args.instanceid:
             Tencent_command(args.instanceid,args.regions,args.command)
-        elif args.scan == True:
-            Tencent_scan(regions)
         else:
             exit(0)
 
