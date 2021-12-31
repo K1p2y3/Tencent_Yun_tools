@@ -38,4 +38,4 @@ python3 Tencent_rce.py -i ins-xxxxx -r ap-beijing -c "touch /tmp/12.txt"
  - [ ] GUI界面
  - [ ] Agent检测
  
- * 本项目仅供测试使用，转发先点赞 ～
+ * 本项目仅供测试使用，使用先点赞 ～
